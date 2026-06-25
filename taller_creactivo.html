@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yachayniyoq — Marionetas, Arte y Música para Niños</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --azul:    #1B6CA8;
+    --naranja: #F4A020;
+    --verde:   #27AE60;
+    --rojo:    #E74C3C;
+    --morado:  #8E44AD;
+    --oscuro:  #1A2B3C;
+    --claro:   #F0F6FF;
+    --blanco:  #FFFFFF;
+    --gris:    #64748B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--blanco);
+    color: var(--oscuro);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    background: rgba(192,66,122,0.97);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.75rem 2rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  }
+  .nav-logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem; color: var(--blanco);
+    letter-spacing: 0.5px;
+  }
+  .nav-logo span { color: var(--naranja); }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; }
+  nav ul a {
+    color: rgba(255,255,255,0.88); text-decoration: none;
+    font-weight: 700; font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--naranja); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #c0427a 0%, #e8609a 50%, #f48fb1 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 7rem 1.5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero-badge {
+    background: rgba(244,160,32,0.2);
+    border: 1.5px solid var(--naranja);
+    color: var(--naranja);
+    font-size: 0.8rem; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 0.35rem 1rem; border-radius: 20px;
+    margin-bottom: 1.5rem; display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    color: var(--blanco); line-height: 1.05;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 span { color: var(--naranja); }
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(255,255,255,0.82);
+    max-width: 600px; margin: 0 auto 0.8rem;
+    font-weight: 600; line-height: 1.5;
+  }
+  .hero-tagline {
+    font-size: 1rem; color: rgba(255,255,255,0.6);
+    font-style: italic; margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: var(--naranja); color: var(--oscuro);
+    font-weight: 800; font-size: 1rem;
+    padding: 0.85rem 2rem; border-radius: 50px;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(244,160,32,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(244,160,32,0.5); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.1); color: var(--blanco);
+    font-weight: 700; font-size: 1rem;
+    padding: 0.85rem 2rem; border-radius: 50px;
+    text-decoration: none; border: 2px solid rgba(255,255,255,0.35);
+    transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2rem; color: var(--naranja); line-height: 1;
+  }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); font-weight: 600; margin-top: 0.2rem; }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 1.5rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    text-transform: uppercase; letter-spacing: 2px;
+    font-size: 0.75rem; font-weight: 800;
+    color: var(--azul); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--oscuro); margin-bottom: 1rem; line-height: 1.15;
+  }
+  .section-title span { color: var(--azul); }
+  .section-desc { font-size: 1.05rem; color: var(--gris); max-width: 600px; line-height: 1.7; }
+
+  /* ── PROBLEMA ── */
+  .problema { background: var(--claro); }
+  .problema-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .ods-card {
+    background: var(--blanco); border-radius: 16px;
+    padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--azul);
+    transition: transform 0.2s;
+  }
+  .ods-card:hover { transform: translateY(-4px); }
+  .ods-card:nth-child(1) { border-top-color: #27AE60; }
+  .ods-card:nth-child(2) { border-top-color: #E74C3C; }
+  .ods-card:nth-child(3) { border-top-color: #E67E22; }
+  .ods-card:nth-child(4) { border-top-color: #2980B9; }
+  .ods-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.85rem; font-weight: 800;
+    letter-spacing: 1px; margin-bottom: 0.4rem;
+  }
+  .ods-card:nth-child(1) .ods-num { color: #27AE60; }
+  .ods-card:nth-child(2) .ods-num { color: #E74C3C; }
+  .ods-card:nth-child(3) .ods-num { color: #E67E22; }
+  .ods-card:nth-child(4) .ods-num { color: #2980B9; }
+  .ods-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .ods-card p { font-size: 0.9rem; color: var(--gris); line-height: 1.6; }
+
+  /* ── INSIGHTS ── */
+  .insights-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .insight-card {
+    border-radius: 16px; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .insight-card:nth-child(1) { background: #EBF5FB; border-left: 5px solid var(--azul); }
+  .insight-card:nth-child(2) { background: #FEF9E7; border-left: 5px solid var(--naranja); }
+  .insight-card:nth-child(3) { background: #EAFAF1; border-left: 5px solid var(--verde); }
+  .insight-tag {
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .insight-card:nth-child(1) .insight-tag { color: var(--azul); }
+  .insight-card:nth-child(2) .insight-tag { color: var(--naranja); }
+  .insight-card:nth-child(3) .insight-tag { color: var(--verde); }
+  .insight-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.7rem; line-height: 1.3; }
+  .insight-card p { font-size: 0.92rem; color: var(--gris); line-height: 1.65; }
+  .insight-person {
+    margin-top: 1rem; font-size: 0.8rem; font-weight: 700;
+    color: var(--gris); font-style: italic;
+  }
+
+  /* ── PROPUESTA ── */
+  .propuesta { background: var(--oscuro); color: var(--blanco); }
+  .propuesta .section-title { color: var(--blanco); }
+  .propuesta .section-title span { color: var(--naranja); }
+  .propuesta .section-eyebrow { color: var(--naranja); }
+  .propuesta .section-desc { color: rgba(255,255,255,0.7); }
+  .fases {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .fase-card {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 2rem;
+    transition: background 0.2s;
+  }
+  .fase-card:hover { background: rgba(255,255,255,0.1); }
+  .fase-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .fase-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem; color: var(--naranja); margin-bottom: 0.6rem;
+  }
+  .fase-card p { font-size: 0.95rem; color: rgba(255,255,255,0.72); line-height: 1.65; }
+
+  /* ── PRECIO ── */
+  .precio { background: var(--claro); }
+  .precio-box {
+    background: var(--blanco); border-radius: 24px;
+    padding: 3rem; box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    max-width: 520px; margin: 3rem auto 0; text-align: center;
+    border: 3px solid var(--naranja);
+  }
+  .precio-label { font-size: 0.8rem; font-weight: 800; color: var(--gris); letter-spacing: 1.5px; text-transform: uppercase; }
+  .precio-amount {
+    font-family: 'Fredoka One', cursive;
+    font-size: 4.5rem; color: var(--azul); line-height: 1; margin: 0.3rem 0 0;
+  }
+  .precio-period { font-size: 1rem; color: var(--gris); font-weight: 600; }
+  .precio-divider { border: none; border-top: 1.5px solid #E2E8F0; margin: 1.5rem 0; }
+  .precio-list { list-style: none; text-align: left; }
+  .precio-list li {
+    padding: 0.5rem 0; font-size: 0.97rem; color: var(--oscuro);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .precio-list li::before { content: '✅'; font-size: 0.9rem; flex-shrink: 0; }
+  .precio-nota {
+    margin-top: 1.2rem; font-size: 0.85rem; color: var(--gris);
+    font-style: italic; line-height: 1.5;
+  }
+
+  /* ── COCREACION ── */
+  .cocreacion { background: var(--blanco); }
+  .pasos {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; margin-top: 3rem; position: relative;
+  }
+  .paso {
+    text-align: center; padding: 2rem 1.5rem;
+    border-radius: 16px; background: var(--claro);
+  }
+  .paso-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: var(--blanco);
+    margin: 0 auto 1rem;
+  }
+  .paso:nth-child(1) .paso-num { background: var(--azul); }
+  .paso:nth-child(2) .paso-num { background: var(--naranja); }
+  .paso:nth-child(3) .paso-num { background: var(--morado); }
+  .paso:nth-child(4) .paso-num { background: var(--verde); }
+  .paso h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .paso p { font-size: 0.88rem; color: var(--gris); line-height: 1.6; }
+
+  /* ── TESTIMONIOS ── */
+  .testimonios { background: var(--azul); }
+  .testimonios .section-title { color: var(--blanco); }
+  .testimonios .section-eyebrow { color: var(--naranja); }
+  .test-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .test-card {
+    background: rgba(255,255,255,0.1); border-radius: 16px;
+    padding: 1.8rem; border: 1px solid rgba(255,255,255,0.15);
+  }
+  .test-quote {
+    font-size: 1rem; color: rgba(255,255,255,0.9);
+    line-height: 1.7; font-style: italic; margin-bottom: 1rem;
+  }
+  .test-quote::before { content: '"'; font-size: 1.5rem; color: var(--naranja); }
+  .test-author { font-size: 0.85rem; font-weight: 800; color: var(--naranja); }
+  .test-role { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+
+  /* ── CONTACTO ── */
+  .contacto { background: var(--oscuro); color: var(--blanco); text-align: center; }
+  .contacto .section-title { color: var(--blanco); }
+  .contacto .section-title span { color: var(--naranja); }
+  .contacto .section-eyebrow { color: var(--naranja); }
+  .contact-cards {
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+    justify-content: center; margin-top: 3rem;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 2rem 2.5rem;
+    text-decoration: none; color: var(--blanco);
+    transition: background 0.2s, transform 0.2s;
+    text-align: center; min-width: 200px;
+  }
+  .contact-card:hover { background: rgba(255,255,255,0.13); transform: translateY(-3px); }
+  .contact-icon { font-size: 2.2rem; margin-bottom: 0.7rem; }
+  .contact-label { font-size: 0.75rem; color: var(--naranja); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .contact-value { font-size: 1rem; font-weight: 700; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d1a27; color: rgba(255,255,255,0.45);
+    text-align: center; padding: 1.5rem;
+    font-size: 0.82rem;
+  }
+  footer span { color: var(--naranja); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  /* ── SCROLL ANIMATION ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>Yachayniyoq</span></div>
+  <ul>
+    <li><a href="#problema">El Problema</a></li>
+    <li><a href="#propuesta">Nuestra Solución</a></li>
+    <li><a href="#precio">Precio</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🎭 Innovación Social · Cusco, Perú</div>
+  <h1><span>Yachayniyoq</span></h1>
+  <p class="hero-sub">Marionetas, Arte y Música para Niños</p>
+  <p class="hero-tagline">La alternativa creativa al uso excesivo de pantallas</p>
+  <div class="hero-btns">
+    <a href="#contacto" class="btn-primary">📲 Inscribe a tu hijo</a>
+    <a href="#propuesta" class="btn-secondary">Conoce más</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">S/40</div>
+      <div class="stat-label">al mes por niño</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6–12</div>
+      <div class="stat-label">años de edad</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">fases del programa</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">0%</div>
+      <div class="stat-label">pantallas en el taller</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problema" id="problema">
+  <div class="container">
+    <p class="section-eyebrow reveal">El problema que identificamos</p>
+    <h2 class="section-title reveal">El uso excesivo de pantallas <span>afecta a nuestros niños</span></h2>
+    <p class="section-desc reveal">Un niño que pasa más de 6 horas al día frente a una pantalla duerme mal, rinde menos en el colegio y se aísla de su familia y amigos. Este problema toca 4 Objetivos de Desarrollo Sostenible.</p>
+    <div class="problema-grid">
+      <div class="ods-card reveal">
+        <div class="ods-num">ODS 3</div>
+        <h3>Salud y Bienestar</h3>
+        <p>El exceso de pantallas genera sedentarismo, alteraciones del sueño, ansiedad e irritabilidad en los niños.</p>
+      </div>
+      <div class="ods-card reveal">
+        <div class="ods-num">ODS 4</div>
+        <h3>Educación de Calidad</h3>
+        <p>La sobreexposición reduce la atención y la concentración, deteriorando el rendimiento escolar.</p>
+      </div>
+      <div class="ods-card reveal">
+        <div class="ods-num">ODS 10</div>
+        <h3>Reducción de Desigualdades</h3>
+        <p>No todos los niños acceden a supervisión parental ni educación digital adecuada.</p>
+      </div>
+      <div class="ods-card reveal">
+        <div class="ods-num">ODS 16</div>
+        <h3>Paz, Justicia e Instituciones</h3>
+        <p>Se requieren políticas públicas que protejan los derechos de la infancia en entornos digitales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section id="insights">
+  <div class="container">
+    <p class="section-eyebrow reveal">Lo que escuchamos</p>
+    <h2 class="section-title reveal">Hablamos con <span>familias reales de Cusco</span></h2>
+    <p class="section-desc reveal">Entrevistamos a Sara (11 años), a su mamá Lucía y al docente Federico. Esto es lo que nos dijeron:</p>
+    <div class="insights-grid">
+      <div class="insight-card reveal">
+        <div class="insight-tag">Insight 01 — Sara, 11 años</div>
+        <h3>Los niños usan el celular porque no tienen alternativas</h3>
+        <p>Sara no rechaza la tecnología — la usa porque cuando está sola en casa no encuentra actividades igual de atractivas y accesibles.</p>
+        <p class="insight-person">— Sara, 11 años, estudiante de primaria</p>
+      </div>
+      <div class="insight-card reveal">
+        <div class="insight-tag">Insight 02 — Lucía, mamá</div>
+        <h3>Los padres quieren actuar pero se sienten solos</h3>
+        <p>Lucía sabe que el uso excesivo es un problema e intenta dar el ejemplo, pero no tiene herramientas para poner límites sin generar conflictos.</p>
+        <p class="insight-person">— Lucía Rodrigues, madre de familia</p>
+      </div>
+      <div class="insight-card reveal">
+        <div class="insight-tag">Insight 03 — Federico, docente</div>
+        <h3>Los docentes actúan solos sin apoyo familiar</h3>
+        <p>Federico detecta el problema en el aula pero actúa de manera aislada — sin coordinación con las familias ni herramientas pedagógicas.</p>
+        <p class="insight-person">— Federico Barbachan, docente de primaria</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPUESTA -->
+<section class="propuesta" id="propuesta">
+  <div class="container">
+    <p class="section-eyebrow reveal">Nuestra solución</p>
+    <h2 class="section-title reveal">Yachayniyoq</h2>
+    <p class="section-desc reveal">Un programa presencial en dos fases que ofrece a los niños de 6 a 12 años actividades creativas tan divertidas como el celular — pero que desarrollan sus habilidades sociales, motoras y emocionales.</p>
+    <div class="fases">
+      <div class="fase-card reveal">
+        <div class="fase-icon">🏫</div>
+        <h3>Fase 1 — Taller en el colegio</h3>
+        <p>Visitamos los colegios y dictamos un taller donde los niños construyen sus propios títeres con materiales reciclados: cartón, tela y pinturas. Una experiencia que los engancha desde el primer día.</p>
+      </div>
+      <div class="fase-card reveal">
+        <div class="fase-icon">🏠</div>
+        <h3>Fase 2 — Local comunitario</h3>
+        <p>Los niños interesados son invitados a clases regulares de manualidades, música y arte en nuestro espacio comunitario. Un lugar seguro, creativo y social donde el celular no hace falta.</p>
+      </div>
+      <div class="fase-card reveal">
+        <div class="fase-icon">🎯</div>
+        <h3>Resultado esperado</h3>
+        <p>Niños con actividades creativas que compiten con el celular, y familias con un espacio de apoyo real. Padres empoderados con herramientas concretas, sin conflictos diarios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section class="precio" id="precio">
+  <div class="container" style="text-align:center;">
+    <p class="section-eyebrow reveal">Accesible para todas las familias</p>
+    <h2 class="section-title reveal">Solo <span>S/ 40</span> al mes</h2>
+    <p class="section-desc reveal" style="margin:0 auto;">Mucho menos de lo que gastas en recargas de internet o videojuegos — y con un impacto real en el desarrollo de tu hijo.</p>
+    <div class="precio-box reveal">
+      <div class="precio-label">Mensualidad familiar</div>
+      <div class="precio-amount">S/ 40</div>
+      <div class="precio-period">por niño · por mes</div>
+      <hr class="precio-divider">
+      <ul class="precio-list">
+        <li>Clases regulares de manualidades y arte</li>
+        <li>Taller de marionetas y títeres</li>
+        <li>Clases de música con instrumentos simples</li>
+        <li>Espacio social y comunitario seguro</li>
+        <li>Reporte mensual de avance del niño</li>
+        <li>Coordinación directa con docentes</li>
+      </ul>
+      <p class="precio-nota">El taller introductorio en el colegio es <strong>100% gratuito</strong>. Tu hijo prueba antes de inscribirse.</p>
+      <a href="https://wa.me/51931998513" class="btn-primary" style="display:inline-block; margin-top:1.5rem;">📲 Inscribir ahora por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- COCREACION -->
+<section class="cocreacion">
+  <div class="container">
+    <p class="section-eyebrow reveal">Cómo lo diseñamos</p>
+    <h2 class="section-title reveal">Creado <span>junto a las familias</span></h2>
+    <p class="section-desc reveal">Esta solución no la inventamos solos. La cocreamos con Sara, Lucía y Federico en 4 pasos:</p>
+    <div class="pasos">
+      <div class="paso reveal">
+        <div class="paso-num">1</div>
+        <h3>Validación de insights</h3>
+        <p>Compartimos nuestros 3 hallazgos con los entrevistados. Todos validaron el problema de los padres como el más urgente.</p>
+      </div>
+      <div class="paso reveal">
+        <div class="paso-num">2</div>
+        <h3>Ideación conjunta</h3>
+        <p>Presentamos ideas preliminares a Lucía y Federico para que las evaluaran desde su experiencia real.</p>
+      </div>
+      <div class="paso reveal">
+        <div class="paso-num">3</div>
+        <h3>Retroalimentación</h3>
+        <p>Lucía pidió algo sin internet. Federico sugirió usar docentes como canal. Sara quería diversión, no obligaciones.</p>
+      </div>
+      <div class="paso reveal">
+        <div class="paso-num">4</div>
+        <h3>Refinamiento final</h3>
+        <p>Con todas las sugerencias, pasamos de una app digital a un espacio presencial más humano y con mayor impacto real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios">
+  <div class="container">
+    <p class="section-eyebrow reveal">Voces reales</p>
+    <h2 class="section-title reveal">Lo que dijeron nuestros co-creadores</h2>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <p class="test-quote">Quiero hacer algo, pero no sé cómo controlar el uso del celular sin que se enoje conmigo. Necesito herramientas concretas, no solo consejos.</p>
+        <div class="test-author">Lucía Rodrigues</div>
+        <div class="test-role">Madre de familia · Co-creadora</div>
+      </div>
+      <div class="test-card reveal">
+        <p class="test-quote">Lo veo en el aula todos los días: los niños llegan cansados, distraídos. Pero si los padres no se involucran, yo solo no puedo resolver esto.</p>
+        <div class="test-author">Federico Barbachan</div>
+        <div class="test-role">Docente de primaria · Co-creador</div>
+      </div>
+      <div class="test-card reveal">
+        <p class="test-quote">Prefiero jugar con mis amigas. Pero cuando estoy sola en casa no hay nada que hacer y el celular siempre está ahí.</p>
+        <div class="test-author">Sara, 11 años</div>
+        <div class="test-role">Estudiante · Co-creadora</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="container">
+    <p class="section-eyebrow reveal">Contáctanos</p>
+    <h2 class="section-title reveal">¿Quieres inscribir <span>a tu hijo?</span></h2>
+    <p style="color:rgba(255,255,255,0.65); margin-top:0.5rem; font-size:1rem;" class="reveal">Escríbenos por WhatsApp o correo. El primer taller es gratuito.</p>
+    <div class="contact-cards">
+      <a href="https://wa.me/51931998513" class="contact-card reveal" target="_blank">
+        <div class="contact-icon">📲</div>
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value">931 998 513</div>
+      </a>
+      <a href="mailto:fabiolaquenayaq@gmail.com" class="contact-card reveal" target="_blank">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-label">Correo</div>
+        <div class="contact-value">fabiolaquenayaq@gmail.com</div>
+      </a>
+      <div class="contact-card reveal">
+        <div class="contact-icon">📍</div>
+        <div class="contact-label">Ubicación</div>
+        <div class="contact-value">Cusco, Perú</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Yachayniyoq</span> · Proyecto de Innovación Social · Universidad Continental · Cusco, Perú</p>
+  <p style="margin-top:0.4rem;">Grupo Los Fantásticos — García · Muñoz · Pastor · Quenaya · Tito</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
